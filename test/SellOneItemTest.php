@@ -9,7 +9,12 @@ class Sale {
   }
 
   public function onBarcode($barcode) {
-    $this->display->setText("EUR 7.95");
+    if ($barcode == "12345") {
+      $this->display->setText("EUR 7.95");
+    }
+    else {
+      $this->display->setText("EUR 10.00");
+    }
   }
 }
 
@@ -31,10 +36,8 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testProductNotFound() {
-    $this->markTestSkipped("Refactoring to make it possible to pass this test...");
-
-    $sale = new Sale();
     $display = new Display();
+    $sale = new Sale($display);
 
     $sale->onBarcode("23456");
 

@@ -9,7 +9,10 @@ class Sale {
   }
 
   public function onBarcode($barcode) {
-    if ($barcode == "12345") {
+    if ($barcode == "") {
+      $this->display->setText("Scanning error: empty barcode");
+    }
+    else if ($barcode == "12345") {
       $this->display->setText("EUR 7.95");
     }
     else if ($barcode == "23456") {
@@ -54,6 +57,15 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
     $sale->onBarcode("99999");
 
     $this->assertEquals("Product not found: 99999", $display->getText());
+  }
+
+  public function testEmptyBarcode() {
+    $display = new Display();
+    $sale = new Sale($display);
+
+    $sale->onBarcode("");
+
+    $this->assertEquals("Scanning error: empty barcode", $display->getText());
   }
 }
 ?>

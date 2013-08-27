@@ -35,7 +35,7 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals("EUR 7.95", $display->getText());
   }
 
-  public function testProductNotFound() {
+  public function testAnotherProductFound() {
     $display = new Display();
     $sale = new Sale($display);
 

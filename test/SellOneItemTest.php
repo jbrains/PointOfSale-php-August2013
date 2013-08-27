@@ -18,5 +18,16 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
 
     $this->assertEquals("EUR 7.95", $display->getText());
   }
+
+  public function testProductNotFound() {
+    $this->markTestSkipped("Refactoring to make it possible to pass this test...");
+
+    $sale = new Sale();
+    $display = new Display();
+
+    $sale->onBarcode("23456");
+
+    $this->assertEquals("EUR 10.00", $display->getText());
+  }
 }
 ?>

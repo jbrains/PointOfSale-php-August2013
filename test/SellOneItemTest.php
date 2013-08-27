@@ -19,7 +19,7 @@ class Sale {
       $this->display->setText($pricesByBarcode[$barcode]);
     }
     else if ($barcode == "23456") {
-      $this->display->setText($pricesByBarcode["23456"]);
+      $this->display->setText($pricesByBarcode[$barcode]);
     }
     else {
       $this->display->setText(sprintf("Product not found: %s", $barcode));

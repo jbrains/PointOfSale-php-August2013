@@ -6,9 +6,9 @@ class Sale {
   private $display;
   private $pricesByBarcode;
 
-  public function __construct($display) {
+  public function __construct($display, $pricesByBarcode = array("12345" => "EUR 7.95", "23456" => "EUR 10.00")) {
     $this->display = $display;
-    $this->pricesByBarcode = array("12345" => "EUR 7.95", "23456" => "EUR 10.00");
+    $this->pricesByBarcode = $pricesByBarcode;
   }
 
   public function onBarcode($barcode) {

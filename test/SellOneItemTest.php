@@ -16,7 +16,7 @@ class Sale {
       $this->display->setText("EUR 10.00");
     }
     else {
-      $this->display->setText("Product not found: 99999");
+      $this->display->setText(sprintf("Product not found: %s", $barcode));
     }
   }
 }

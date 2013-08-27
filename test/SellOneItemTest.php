@@ -11,8 +11,10 @@ class Sale {
   public function onBarcode($barcode) {
     if ($barcode == "") {
       $this->display->setText("Scanning error: empty barcode");
+      return;
     }
-    else if ($barcode == "12345") {
+
+    if ($barcode == "12345") {
       $this->display->setText("EUR 7.95");
     }
     else if ($barcode == "23456") {

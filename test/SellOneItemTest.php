@@ -4,9 +4,11 @@ error_reporting(E_ALL);
 
 class Sale {
   private $display;
+  private $pricesByBarcode;
 
   public function __construct($display) {
     $this->display = $display;
+    $this->pricesByBarcode = array("12345" => "EUR 7.95", "23456" => "EUR 10.00");
   }
 
   public function onBarcode($barcode) {
@@ -15,9 +17,8 @@ class Sale {
       return;
     }
 
-    $pricesByBarcode = array("12345" => "EUR 7.95", "23456" => "EUR 10.00");
-    if (array_key_exists($barcode, $pricesByBarcode)) {
-      $this->display->setText($pricesByBarcode[$barcode]);
+    if (array_key_exists($barcode, $this->pricesByBarcode)) {
+      $this->display->setText($this->pricesByBarcode[$barcode]);
     }
     else {
       $this->display->setText(sprintf("Product not found: %s", $barcode));

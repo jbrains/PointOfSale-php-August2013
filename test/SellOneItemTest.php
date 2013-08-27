@@ -14,8 +14,9 @@ class Sale {
       return;
     }
 
+    $pricesByBarcode = array("12345" => "EUR 7.95");
     if ($barcode == "12345") {
-      $this->display->setText("EUR 7.95");
+      $this->display->setText($pricesByBarcode["12345"]);
     }
     else if ($barcode == "23456") {
       $this->display->setText("EUR 10.00");

@@ -2,17 +2,28 @@
 require 'vendor/autoload.php';
 
 class Sale {
-  public function onBarcode($barcode) {}
+  private $display;
+
+  public function __construct($display) {
+    $this->display = $display;
+  }
+
+  public function onBarcode($barcode) {
+    $this->display->setText("EUR 7.95");
+  }
 }
 
 class Display {
-  public function getText() { return "EUR 7.95"; }
+  private $text;
+
+  public function getText() { return $this->text; }
+  public function setText($text) { $this->text = $text; }
 }
 
 class SellOneItemTest extends PHPUnit_Framework_TestCase {
   public function testProductFound() {
-    $sale = new Sale();
     $display = new Display();
+    $sale = new Sale($display);
 
     $sale->onBarcode("12345");
 

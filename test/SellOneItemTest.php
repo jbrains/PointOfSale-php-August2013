@@ -6,7 +6,7 @@ class Sale {
   private $display;
   private $pricesByBarcode;
 
-  public function __construct($display, $pricesByBarcode = array("12345" => "EUR 7.95", "23456" => "EUR 10.00")) {
+  public function __construct($display, $pricesByBarcode) {
     $this->display = $display;
     $this->pricesByBarcode = $pricesByBarcode;
   }
@@ -36,7 +36,7 @@ class Display {
 class SellOneItemTest extends PHPUnit_Framework_TestCase {
   public function testProductFound() {
     $display = new Display();
-    $sale = new Sale($display);
+    $sale = new Sale($display, array("12345" => "EUR 7.95", "23456" => "EUR 10.00"));
 
     $sale->onBarcode("12345");
 
@@ -45,7 +45,7 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
 
   public function testAnotherProductFound() {
     $display = new Display();
-    $sale = new Sale($display);
+    $sale = new Sale($display, array("12345" => "EUR 7.95", "23456" => "EUR 10.00"));
 
     $sale->onBarcode("23456");
 
@@ -54,7 +54,7 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
 
   public function testProductNotFound() {
     $display = new Display();
-    $sale = new Sale($display);
+    $sale = new Sale($display, array("12345" => "EUR 7.95", "23456" => "EUR 10.00"));
 
     $sale->onBarcode("99999");
 
@@ -63,7 +63,7 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
 
   public function testEmptyBarcode() {
     $display = new Display();
-    $sale = new Sale($display);
+    $sale = new Sale($display, array("12345" => "EUR 7.95", "23456" => "EUR 10.00"));
 
     $sale->onBarcode("");
 

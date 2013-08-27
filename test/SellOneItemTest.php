@@ -54,7 +54,7 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
 
   public function testProductNotFound() {
     $display = new Display();
-    $sale = new Sale($display, array());
+    $sale = new Sale($display, array("anything but 99999", "irrelevant price"));
 
     $sale->onBarcode("99999");
 

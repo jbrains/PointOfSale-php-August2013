@@ -30,7 +30,7 @@ class Sale {
       $this->display->setText("No sale in progress. Scan a product to start.");
     }
     else {
-      $this->display->setText("Total: EUR 7.95");
+      $this->display->setText(sprintf("Total: %s", "EUR 7.95"));
     }
   }
 }

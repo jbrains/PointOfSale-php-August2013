@@ -11,6 +11,16 @@ class SellManyItemsTest extends PHPUnit_Framework_TestCase {
 
     $this->assertEquals("No sale in progress. Scan a product to start.", $display->getText());
   }
+
+  public function testOneItem() {
+    $display = new Display();
+    $sale = new Sale($display, array("12345" => "EUR 7.95"));
+
+    $sale->onBarcode("12345");
+    $sale->onTotal();
+
+    $this->assertEquals("Total: EUR 7.95", $display->getText());
+  }
 }
 
 ?>

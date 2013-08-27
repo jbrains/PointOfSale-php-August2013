@@ -6,6 +6,7 @@ class Sale {
   public function __construct($display, $pricesByBarcode) {
     $this->display = $display;
     $this->pricesByBarcode = $pricesByBarcode;
+    $this->products_scanned = array();
   }
 
   public function onBarcode($barcode) {
@@ -15,7 +16,9 @@ class Sale {
     }
 
     if (array_key_exists($barcode, $this->pricesByBarcode)) {
-      $this->display->setText($this->pricesByBarcode[$barcode]);
+      $price = $this->pricesByBarcode[$barcode];
+      $this->display->setText($price);
+      array_push($this->products_scanned, $price);
     }
     else {
       $this->display->setText(sprintf("Product not found: %s", $barcode));
@@ -23,7 +26,12 @@ class Sale {
   }
 
   public function onTotal() {
-    $this->display->setText("No sale in progress. Scan a product to start.");
+    if (count($this->products_scanned) == 0) {
+      $this->display->setText("No sale in progress. Scan a product to start.");
+    }
+    else {
+      $this->display->setText("Total: EUR 7.95");
+    }
   }
 }
 

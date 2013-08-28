@@ -1,4 +1,20 @@
 <?php
+class Price {
+  private $cents;
+
+  public function __construct($cents) {
+    $this->cents = $cents;
+  }
+
+  public static function cents($cents) {
+    return new Price($cents);
+  }
+
+  public function format() {
+    return sprintf("EUR %.2f", ($this->cents / 100.0));
+  }
+}
+
 class Sale {
   private $display;
   private $catalog;

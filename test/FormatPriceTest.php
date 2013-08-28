@@ -1,20 +1,5 @@
 <?php
-
-class Price {
-  private $cents;
-
-  public function __construct($cents) {
-    $this->cents = $cents;
-  }
-
-  public static function cents($cents) {
-    return new Price($cents);
-  }
-
-  public function format() {
-    return sprintf("EUR %.2f", ($this->cents / 100.0));
-  }
-}
+include_once 'ProductionCodeJunkDrawer.php';
 
 class FormatPriceTest extends PHPUnit_Framework_TestCase {
   public function specialCases() {

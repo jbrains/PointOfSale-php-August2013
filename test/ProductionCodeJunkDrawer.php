@@ -9,19 +9,39 @@ class Sale {
     $this->products_scanned = array();
   }
 
+  public function displayEmptyBarcodeMessage() {
+    $this->display->setText("Scanning error: empty barcode");
+  }
+
+  public function displayPrice($price) {
+    $this->display->setText($price);
+  }
+
+  public function displayProductNotFoundMessage($barcode) {
+    $this->display->setText(sprintf("Product not found: %s", $barcode));
+  }
+
+  public function findPrice($barcode) {
+    return $this->pricesByBarcode[$barcode];
+  }
+
+  public function hasBarcode($barcode) {
+    return array_key_exists($barcode, $this->pricesByBarcode);
+  }
+
   public function onBarcode($barcode) {
     if ($barcode == "") {
-      $this->display->setText("Scanning error: empty barcode");
+      $this->displayEmptyBarcodeMessage();
       return;
     }
 
-    if (array_key_exists($barcode, $this->pricesByBarcode)) {
-      $price = $this->pricesByBarcode[$barcode];
-      $this->display->setText($price);
+    if ($this->hasBarcode($barcode)) {
+      $price = $this->findPrice($barcode);
+      $this->displayPrice($price);
       array_push($this->products_scanned, $price);
     }
     else {
-      $this->display->setText(sprintf("Product not found: %s", $barcode));
+      $this->displayProductNotFoundMessage($barcode);
     }
   }
 

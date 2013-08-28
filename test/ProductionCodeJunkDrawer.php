@@ -55,7 +55,7 @@ class Catalog {
   private $formattedPricesByBarcode;
   private $pricesByBarcode;
 
-  public function __construct($formattedPricesByBarcode, $pricesByBarcode=NULL) {
+  public function __construct($formattedPricesByBarcode, $pricesByBarcode) {
     $this->pricesByBarcode = $pricesByBarcode;
     $this->formattedPricesByBarcode = $formattedPricesByBarcode;
   }

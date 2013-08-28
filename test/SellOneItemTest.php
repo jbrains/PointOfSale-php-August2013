@@ -29,9 +29,9 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
 
     $display = new Display();
     $sale = new Sale($display, new Catalog(
-      array("anything but 99999", "irrelevant price")),
-      array("anything but 99999", Price::cents($irrelevantPrice))
-    );
+      array("anything but 99999" => "irrelevant price"),
+      array("anything but 99999" => Price::cents($irrelevantPrice))
+    ));
 
     $sale->onBarcode("99999");
 

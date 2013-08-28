@@ -5,7 +5,7 @@ include_once 'ProductionCodeJunkDrawer.php';
 class SellManyItemsTest extends PHPUnit_Framework_TestCase {
   public function testZeroItems() {
     $display = new Display();
-    $sale = new Sale($display, null, null);
+    $sale = new Sale($display, null);
 
     $sale->onTotal();
 
@@ -15,7 +15,6 @@ class SellManyItemsTest extends PHPUnit_Framework_TestCase {
   public function testOneItem() {
     $display = new Display();
     $sale = new Sale($display, new Catalog(
-      array("12345" => "EUR 7.95"),
       array("12345" => Price::cents(795))
     ));
 

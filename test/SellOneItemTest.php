@@ -5,7 +5,7 @@ include_once 'ProductionCodeJunkDrawer.php';
 class SellOneItemTest extends PHPUnit_Framework_TestCase {
   public function testProductFound() {
     $display = new Display();
-    $sale = new Sale($display, new Catalog(array("12345" => "EUR 7.95"), array("12345" => Price::cents(795))));
+    $sale = new Sale($display, new Catalog(array("12345" => Price::cents(795))));
 
     $sale->onBarcode("12345");
 
@@ -15,7 +15,6 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
   public function testProductFoundAmongMany() {
     $display = new Display();
     $sale = new Sale($display, new Catalog(
-      array("12345" => "EUR 7.95", "23456" => "EUR 10.00", "34567" => "EUR 12.50"),
       array("12345" => Price::cents(795), "23456" => Price::cents(1000), "34567" => Price::cents(1250))
     ));
 
@@ -29,7 +28,6 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
 
     $display = new Display();
     $sale = new Sale($display, new Catalog(
-      array("anything but 99999" => "irrelevant price"),
       array("anything but 99999" => Price::cents($irrelevantPrice))
     ));
 
@@ -40,7 +38,7 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
 
   public function testEmptyBarcode() {
     $display = new Display();
-    $sale = new Sale($display, null, null);
+    $sale = new Sale($display, null);
 
     $sale->onBarcode("");
 

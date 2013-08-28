@@ -52,30 +52,18 @@ class Sale {
 }
 
 class Catalog {
-  private $formattedPricesByBarcode;
   private $pricesByBarcode;
 
-  public function __construct($formattedPricesByBarcode, $pricesByBarcode) {
+  public function __construct($pricesByBarcode) {
     $this->pricesByBarcode = $pricesByBarcode;
-    $this->formattedPricesByBarcode = NULL;
   }
 
   public function findPrice($barcode) {
-    if ($this->pricesByBarcode == NULL) {
-      return $this->formattedPricesByBarcode[$barcode];
-    }
-    else {
-      return $this->pricesByBarcode[$barcode]->format();
-    }
+    return $this->pricesByBarcode[$barcode]->format();
   }
 
   public function hasBarcode($barcode) {
-    if ($this->pricesByBarcode == NULL) {
-      return array_key_exists($barcode, $this->formattedPricesByBarcode);
-    }
-    else {
-      return array_key_exists($barcode, $this->pricesByBarcode);
-    }
+    return array_key_exists($barcode, $this->pricesByBarcode);
   }
 }
 

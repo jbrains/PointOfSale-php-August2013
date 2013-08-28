@@ -23,8 +23,8 @@ class Sale {
       return;
     }
 
-    if ($this->hasBarcode($barcode)) {
-      $price = $this->findPrice($barcode);
+    if ($this->catalog->hasBarcode($barcode)) {
+      $price = $this->catalog->findPrice($barcode);
       $this->display->displayPrice($price);
       array_push($this->products_scanned, $price);
     }

@@ -9,10 +9,6 @@ class Sale {
     $this->products_scanned = array();
   }
 
-  public function displayEmptyBarcodeMessage() {
-    $this->display->setText("Scanning error: empty barcode");
-  }
-
   public function displayPrice($price) {
     $this->display->setText($price);
   }
@@ -31,7 +27,7 @@ class Sale {
 
   public function onBarcode($barcode) {
     if ($barcode == "") {
-      $this->displayEmptyBarcodeMessage();
+      $this->display->displayEmptyBarcodeMessage();
       return;
     }
 
@@ -60,5 +56,9 @@ class Display {
 
   public function getText() { return $this->text; }
   public function setText($text) { $this->text = $text; }
+
+  public function displayEmptyBarcodeMessage() {
+    $this->setText("Scanning error: empty barcode");
+  }
 }
 ?>

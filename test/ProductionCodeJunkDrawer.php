@@ -32,9 +32,10 @@ class Sale {
     }
 
     if ($this->catalog->hasBarcode($barcode)) {
-      $price = $this->catalog->findFormattedPrice($barcode);
-      $this->display->displayPrice($price);
-      array_push($this->products_scanned, $price);
+      $price = $this->catalog->findPrice($barcode); 
+      $priceAsText = $price->format();
+      $this->display->displayPrice($priceAsText);
+      array_push($this->products_scanned, $priceAsText);
     }
     else {
       $this->display->displayProductNotFoundMessage($barcode);
@@ -58,8 +59,12 @@ class Catalog {
     $this->pricesByBarcode = $pricesByBarcode;
   }
 
+  public function findPrice($barcode) {
+    return $this->pricesByBarcode[$barcode];
+  }
+
   public function findFormattedPrice($barcode) {
-    return $this->pricesByBarcode[$barcode]->format();
+    return $this->findPrice($barcode)->format();
   }
 
   public function hasBarcode($barcode) {

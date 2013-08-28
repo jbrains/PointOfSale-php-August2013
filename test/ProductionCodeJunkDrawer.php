@@ -70,7 +70,12 @@ class Catalog {
   }
 
   public function hasBarcode($barcode) {
-    return array_key_exists($barcode, $this->formattedPricesByBarcode);
+    if ($this->pricesByBarcode == NULL) {
+      return array_key_exists($barcode, $this->formattedPricesByBarcode);
+    }
+    else {
+      return array_key_exists($barcode, $this->pricesByBarcode);
+    }
   }
 }
 

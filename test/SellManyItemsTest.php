@@ -21,6 +21,22 @@ class SellManyItemsTest extends PHPUnit_Framework_TestCase {
 
     $this->assertEquals("Total: EUR 7.95", $display->getText());
   }
+
+  public function testManyItems() {
+    $display = new Display();
+    $sale = new Sale($display, array(
+      "12345" => "EUR 7.00",
+      "23456" => "EUR 8.00",
+      "34567" => "EUR 9.00",
+    ));
+
+    $sale->onBarcode("12345");
+    $sale->onBarcode("23456");
+    $sale->onBarcode("34567");
+    $sale->onTotal();
+
+    $this->assertEquals("Total: EUR 24.00", $display->getText());
+  }
 }
 
 ?>

@@ -5,7 +5,7 @@ include_once 'ProductionCodeJunkDrawer.php';
 class SellOneItemTest extends PHPUnit_Framework_TestCase {
   public function testProductFound() {
     $display = new Display();
-    $sale = new Sale($display, array("12345" => "EUR 7.95"));
+    $sale = new Sale($display, array("12345" => "EUR 7.95"), new Catalog(array("12345" => "EUR 7.95")));
 
     $sale->onBarcode("12345");
 

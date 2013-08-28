@@ -2,19 +2,31 @@
 class Sale {
   private $display;
   private $pricesByBarcode;
+  private $catalog;
 
-  public function __construct($display, $pricesByBarcode) {
+  public function __construct($display, $pricesByBarcode, $catalog = NULL) {
     $this->display = $display;
     $this->pricesByBarcode = $pricesByBarcode;
     $this->products_scanned = array();
+    $this->catalog = $catalog;
   }
 
   public function findPrice($barcode) {
-    return $this->pricesByBarcode[$barcode];
+    if ($this->catalog == NULL) {
+      return $this->pricesByBarcode[$barcode];
+    }
+    else {
+      return $this->catalog->findPrice($barcode);
+    }
   }
 
   public function hasBarcode($barcode) {
-    return array_key_exists($barcode, $this->pricesByBarcode);
+    if ($this->catalog == NULL) {
+      return array_key_exists($barcode, $this->pricesByBarcode);
+    }
+    else {
+      return $this->catalog->hasBarcode($barcode);
+    }
   }
 
   public function onBarcode($barcode) {
@@ -40,6 +52,22 @@ class Sale {
     else {
       $this->display->setText(sprintf("Total: %s", $this->products_scanned[0]));
     }
+  }
+}
+
+class Catalog {
+  private $pricesByBarcode;
+
+  public function __construct($pricesByBarcode) {
+    $this->pricesByBarcode = $pricesByBarcode;
+  }
+
+  public function findPrice($barcode) {
+    return $this->pricesByBarcode[$barcode];
+  }
+
+  public function hasBarcode($barcode) {
+    return array_key_exists($barcode, $this->pricesByBarcode);
   }
 }
 

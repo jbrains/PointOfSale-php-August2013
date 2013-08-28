@@ -14,7 +14,7 @@ class SellManyItemsTest extends PHPUnit_Framework_TestCase {
 
   public function testOneItem() {
     $display = new Display();
-    $sale = new Sale($display, array("12345" => "EUR 7.95"), new Catalog(array("12345" => "EUR 7.95")));
+    $sale = new Sale($display, new Catalog(array("12345" => "EUR 7.95")));
 
     $sale->onBarcode("12345");
     $sale->onTotal();
@@ -26,11 +26,7 @@ class SellManyItemsTest extends PHPUnit_Framework_TestCase {
     $this->markTestSkipped("When I know that I can compute the total of items in the shopping cart, then I can make this test pass.");
 
     $display = new Display();
-    $sale = new Sale($display, array(
-      "12345" => "EUR 7.00",
-      "23456" => "EUR 8.00",
-      "34567" => "EUR 9.00",
-    ), new Catalog(array(
+    $sale = new Sale($display, new Catalog(array(
       "12345" => "EUR 7.00",
       "23456" => "EUR 8.00",
       "34567" => "EUR 9.00",

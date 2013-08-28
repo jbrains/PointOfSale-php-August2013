@@ -4,9 +4,9 @@ class Sale {
   private $pricesByBarcode;
   private $catalog;
 
-  public function __construct($display, $pricesByBarcode, $catalog = NULL) {
+  public function __construct($display, $catalog) {
     $this->display = $display;
-    $this->pricesByBarcode = $pricesByBarcode;
+    $this->pricesByBarcode = NULL;
     $this->products_scanned = array();
     $this->catalog = $catalog;
   }

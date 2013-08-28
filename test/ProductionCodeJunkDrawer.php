@@ -9,10 +9,6 @@ class Sale {
     $this->products_scanned = array();
   }
 
-  public function displayProductNotFoundMessage($barcode) {
-    $this->display->setText(sprintf("Product not found: %s", $barcode));
-  }
-
   public function findPrice($barcode) {
     return $this->pricesByBarcode[$barcode];
   }
@@ -33,7 +29,7 @@ class Sale {
       array_push($this->products_scanned, $price);
     }
     else {
-      $this->displayProductNotFoundMessage($barcode);
+      $this->display->displayProductNotFoundMessage($barcode);
     }
   }
 
@@ -59,6 +55,10 @@ class Display {
 
   public function displayPrice($price) {
     $this->setText($price);
+  }
+
+  public function displayProductNotFoundMessage($barcode) {
+    $this->setText(sprintf("Product not found: %s", $barcode));
   }
 }
 ?>

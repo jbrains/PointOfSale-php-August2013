@@ -1,32 +1,20 @@
 <?php
 class Sale {
   private $display;
-  private $pricesByBarcode;
   private $catalog;
 
   public function __construct($display, $catalog) {
     $this->display = $display;
-    $this->pricesByBarcode = NULL;
     $this->products_scanned = array();
     $this->catalog = $catalog;
   }
 
   public function findPrice($barcode) {
-    if ($this->catalog == NULL) {
-      return $this->pricesByBarcode[$barcode];
-    }
-    else {
-      return $this->catalog->findPrice($barcode);
-    }
+    return $this->catalog->findPrice($barcode);
   }
 
   public function hasBarcode($barcode) {
-    if ($this->catalog == NULL) {
-      return array_key_exists($barcode, $this->pricesByBarcode);
-    }
-    else {
-      return $this->catalog->hasBarcode($barcode);
-    }
+    return $this->catalog->hasBarcode($barcode);
   }
 
   public function onBarcode($barcode) {

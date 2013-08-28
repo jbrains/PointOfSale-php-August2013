@@ -9,14 +9,6 @@ class Sale {
     $this->catalog = $catalog;
   }
 
-  public function findPrice($barcode) {
-    return $this->catalog->findPrice($barcode);
-  }
-
-  public function hasBarcode($barcode) {
-    return $this->catalog->hasBarcode($barcode);
-  }
-
   public function onBarcode($barcode) {
     if ($barcode == "") {
       $this->display->displayEmptyBarcodeMessage();

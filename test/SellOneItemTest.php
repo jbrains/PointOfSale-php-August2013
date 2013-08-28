@@ -14,7 +14,10 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
 
   public function testProductFoundAmongMany() {
     $display = new Display();
-    $sale = new Sale($display, new Catalog(array("12345" => "EUR 7.95", "23456" => "EUR 10.00", "34567" => "EUR 12.50")));
+    $sale = new Sale($display, new Catalog(
+      array("12345" => "EUR 7.95", "23456" => "EUR 10.00", "34567" => "EUR 12.50"),
+      array("12345" => Price::cents(795), "23456" => Price::cents(1000), "34567" => Price::cents(1250))
+    ));
 
     $sale->onBarcode("23456");
 

@@ -9,10 +9,6 @@ class Sale {
     $this->products_scanned = array();
   }
 
-  public function displayPrice($price) {
-    $this->display->setText($price);
-  }
-
   public function displayProductNotFoundMessage($barcode) {
     $this->display->setText(sprintf("Product not found: %s", $barcode));
   }
@@ -33,7 +29,7 @@ class Sale {
 
     if ($this->hasBarcode($barcode)) {
       $price = $this->findPrice($barcode);
-      $this->displayPrice($price);
+      $this->display->displayPrice($price);
       array_push($this->products_scanned, $price);
     }
     else {
@@ -59,6 +55,10 @@ class Display {
 
   public function displayEmptyBarcodeMessage() {
     $this->setText("Scanning error: empty barcode");
+  }
+
+  public function displayPrice($price) {
+    $this->setText($price);
   }
 }
 ?>

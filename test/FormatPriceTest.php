@@ -3,8 +3,8 @@
 class Price {
   private $cents;
 
-  private function __constructor($cents) {
-    $this->cents = cents;
+  public function __construct($cents) {
+    $this->cents = $cents;
   }
 
   public static function cents($cents) {
@@ -16,13 +16,12 @@ class Price {
   }
 }
 
-
 class FormatPriceTest extends PHPUnit_Framework_TestCase {
-  public function test_zero() {
+  public function testZero() {
     $this->assertEquals("EUR 0.00", Price::cents(0)->format());
   }
 
-  public function xtest_no_trailing_zeroes() {
+  public function testNoTrailingZeroes() {
     $this->assertEquals("EUR 7.81", Price::cents(781)->format());
   }
 }

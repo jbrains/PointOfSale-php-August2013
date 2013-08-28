@@ -33,17 +33,12 @@ class Sale {
 
     if ($this->catalog->hasBarcode($barcode)) {
       $price = $this->catalog->findPrice($barcode); 
-      $priceAsText = $this->formatPrice($price);
       $this->display->displayPrice($price);
-      array_push($this->products_scanned, $priceAsText);
+      array_push($this->products_scanned, $price->format());
     }
     else {
       $this->display->displayProductNotFoundMessage($barcode);
     }
-  }
-
-  public function formatPrice($price) {
-    return $price->format();
   }
 
   public function onTotal() {

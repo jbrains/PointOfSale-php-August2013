@@ -25,8 +25,13 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testProductNotFound() {
+    $irrelevantPrice = 1;
+
     $display = new Display();
-    $sale = new Sale($display, new Catalog(array("anything but 99999", "irrelevant price")));
+    $sale = new Sale($display, new Catalog(
+      array("anything but 99999", "irrelevant price")),
+      array("anything but 99999", Price::cents($irrelevantPrice))
+    );
 
     $sale->onBarcode("99999");
 
@@ -35,7 +40,7 @@ class SellOneItemTest extends PHPUnit_Framework_TestCase {
 
   public function testEmptyBarcode() {
     $display = new Display();
-    $sale = new Sale($display, null);
+    $sale = new Sale($display, null, null);
 
     $sale->onBarcode("");
 

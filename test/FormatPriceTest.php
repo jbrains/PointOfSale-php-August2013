@@ -17,11 +17,15 @@ class Price {
 }
 
 class FormatPriceTest extends PHPUnit_Framework_TestCase {
-  public function testZero() {
-    $this->assertEquals("EUR 0.00", Price::cents(0)->format());
+  public function specialCases() {
+    return array(
+      array("EUR 0.00", 0),
+      array("EUR 7.81", 781),
+    );
   }
 
-  public function testNoTrailingZeroes() {
-    $this->assertEquals("EUR 7.81", Price::cents(781)->format());
+  /** @dataProvider specialCases */
+  public function testFormatPrice($expectedText, $centsAsInteger) {
+    $this->assertEquals($expectedText, Price::cents($centsAsInteger)->format());
   }
 }

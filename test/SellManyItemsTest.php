@@ -14,7 +14,7 @@ class SellManyItemsTest extends PHPUnit_Framework_TestCase {
 
   public function testOneItem() {
     $display = new Display();
-    $sale = new Sale($display, array("12345" => "EUR 7.95"));
+    $sale = new Sale($display, array("12345" => "EUR 7.95"), new Catalog(array("12345" => "EUR 7.95")));
 
     $sale->onBarcode("12345");
     $sale->onTotal();
@@ -30,7 +30,11 @@ class SellManyItemsTest extends PHPUnit_Framework_TestCase {
       "12345" => "EUR 7.00",
       "23456" => "EUR 8.00",
       "34567" => "EUR 9.00",
-    ));
+    ), new Catalog(array(
+      "12345" => "EUR 7.00",
+      "23456" => "EUR 8.00",
+      "34567" => "EUR 9.00",
+    )));
 
     $sale->onBarcode("12345");
     $sale->onBarcode("23456");
